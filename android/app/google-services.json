@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "886744000520",
+    "project_id": "women-safety-alert13",
+    "storage_bucket": "women-safety-alert13.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886744000520:android:2f264bd1f7bf7b21c749bd",
+        "android_client_info": {
+          "package_name": "com.alertapp13.womensafety"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "886744000520-smbvpkmu15luq07cckgou5rq9ho4ee3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDme7NFZMcP8CmKMkfwauBmdWflbVqjtEA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "886744000520-smbvpkmu15luq07cckgou5rq9ho4ee3m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
