@@ -14,7 +14,7 @@ class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
 
   bool loading = false;
-  // text field state
+
   final TextEditingController _emailTextEditingController =
       TextEditingController();
   final TextEditingController _passwordTextEditingController =
@@ -38,7 +38,7 @@ class _SignInState extends State<SignIn> {
       errorMessage = e.message;
     }
   }
-  var isSign = false;
+  var isSign = true;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +60,7 @@ class _SignInState extends State<SignIn> {
                     const Text(
                       'D.E.H.A.S',
                       style: TextStyle(
+                        
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),

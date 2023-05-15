@@ -9,6 +9,6 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = AuthService();
-    return StreamBuilder(stream: auth.authStateChanges,builder: (context, snapshot) => snapshot.hasData ? Home(): const SignIn(), );
+    return StreamBuilder(stream: auth.authStateChanges,builder: (context, snapshot) => snapshot.hasData ? Home() : const SignIn(), );
   }
 }

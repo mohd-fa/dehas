@@ -12,9 +12,26 @@ class Loading extends StatelessWidget {
         child: Stack(
           children: [
             Center(
-              child: SpinKitFadingCircle(
-                color: Colors.blue[300],
-                size: 50,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                    Image.asset('assets/logo.png'),
+                   const Text(
+                      'D.E.H.A.S',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.none
+                          ),
+                          
+                    ),
+                  const SizedBox(height: 10,),
+                  SpinKitFadingCircle(
+                    color: Colors.blue[300],
+                    size: 50,
+                  ),
+                ],
               ),
             ),
             Align(alignment: Alignment.bottomLeft, child: TextButton(onPressed: () => AuthService().signOut(),child: const Text('signout',style: TextStyle(fontSize: 5),),))
