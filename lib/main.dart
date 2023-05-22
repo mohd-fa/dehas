@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:womensafety/wrapper.dart';
+import 'package:dehas/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MainApp());
@@ -17,6 +17,7 @@ class MainApp extends StatelessWidget {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return  MaterialApp(
       theme: ThemeData( cardColor: Colors.red[100],
+      textButtonTheme:  TextButtonThemeData(style: TextButton.styleFrom(foregroundColor: Colors.red)),
         scaffoldBackgroundColor: Colors.red[300], inputDecorationTheme: const InputDecorationTheme( fillColor: Colors.white54, filled: true)),
       home: const Wrapper()
     );
