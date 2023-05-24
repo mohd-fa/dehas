@@ -9,8 +9,7 @@ class Loading extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/bg1.png'), fit: BoxFit.cover)),
-        color: Colors.white,
+                        image: AssetImage('assets/bg1.jpg'), fit: BoxFit.cover)),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
