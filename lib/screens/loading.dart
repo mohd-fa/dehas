@@ -18,7 +18,7 @@ class Loading extends StatelessWidget {
                const Text(
                   'D.E.H.A.S',
                   style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       decoration: TextDecoration.none
