@@ -152,7 +152,7 @@ class _SignInState extends State<SignIn> {
                                     minimumSize: const Size.fromHeight(50),
                                     backgroundColor: Colors.white70),
                                 icon: Image.asset('assets/google.png'),
-                                onPressed: () {},
+                                onPressed: _auth.signInGoogle,
                                 label: isSign ? const Text(
                                   'Sign in with Google',
                                   style: TextStyle(

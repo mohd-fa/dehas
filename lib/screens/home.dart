@@ -1,8 +1,8 @@
+import 'package:dehas/screens/locationpage.dart';
+import 'package:dehas/screens/settingspage.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 import 'package:dehas/screens/homepage.dart';
-import 'package:dehas/screens/chatpage.dart';
-import 'package:dehas/screens/counselpage.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -13,7 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int navindex = 0;
-  final List<Widget> pages = [ const HomePage(),const ChatPage(),const CounselPage()];
+  final List<Widget> pages = [ const HomePage(),const LocationPage(),SettingsPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +27,8 @@ class _HomeState extends State<Home> {
         }),
         barItems: [
           BarItem(title: 'Home', icon: Icons.home_rounded),
-          BarItem(title: 'Chat', icon: Icons.chat_rounded),
-          BarItem(title: 'Counsel', icon: Icons.people),
+          BarItem(title: 'Drone Locations', icon: Icons.location_on),
+          BarItem(title: 'Settings', icon: Icons.settings),
         ],
       ),
     );

@@ -10,53 +10,62 @@ import 'package:dehas/services/contactpicker.dart';
 import 'package:dehas/services/database.dart';
 import 'package:dehas/services/sms.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SmsCard extends StatefulWidget {
   const SmsCard({
     super.key,
   });
-
   @override
   State<SmsCard> createState() => _SmsCardState();
 }
 
 class _SmsCardState extends State<SmsCard> {
+bool smsFlag = true;
   @override
   Widget build(BuildContext context) {
     late SharedPreferences pref;
-    bool smsFlag = true;
-    SharedPreferences.getInstance().then((value){pref = value; smsFlag = pref.getBool('SMS')??true;});
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 20.0),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          const Text('SMS Service',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18)),
-          const SizedBox(
-            height: 10,
+    return FutureBuilder(
+      future: SharedPreferences.getInstance(),
+      builder: (context, snapshot) {
+        if( snapshot.hasData){
+          pref = snapshot.data!;
+          smsFlag = pref.getBool('SMS')??true;
+        }
+        return Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          elevation: 5,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              const Text('SMS Service',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18)),
+              const SizedBox(
+                height: 10,
+              ),
+              const Icon(
+                Icons.sms,
+                size: 50,
+              ),
+              Switch(
+                activeColor: Colors.red,
+                splashRadius: 40.0,
+                value: smsFlag,
+                onChanged: (value) async{
+                  setState(()  {
+                    smsFlag = value;
+                  });
+                    await pref.setBool('SMS', value);
+                    
+                },
+              ),
+            ]),
           ),
-          const Icon(
-            Icons.sms,
-            size: 50,
-          ),
-          Switch(
-            activeColor: Colors.red,
-            splashRadius: 40.0,
-            value: smsFlag,
-            onChanged: (value) {
-              setState(() {
-                smsFlag= value;
-              });
-              pref.setBool('SMS', value);
-            },
-          ),
-        ]),
-      ),
+        );
+      }
     );
   }
 }
@@ -75,7 +84,10 @@ class _DroneCardState extends State<DroneCard> {
   Widget build(BuildContext context) {
     late SharedPreferences pref;
     bool droneFlag = true;
-    SharedPreferences.getInstance().then((value){pref = value; droneFlag = pref.getBool('drone')??false;});
+    SharedPreferences.getInstance().then((value) {
+      pref = value;
+      droneFlag = pref.getBool('drone') ?? false;
+    });
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       elevation: 5,
@@ -126,55 +138,87 @@ class _ContactCardState extends State<ContactCard> {
   final _cp = ContactPicker();
 
   final _db = DataBaseServices();
-  late List<Contact> contacts;
+  List<Contact> contacts = [];
   @override
   Widget build(BuildContext context) {
-    late SharedPreferences pref;
-
-    SharedPreferences.getInstance().then((value){pref = value; contacts = pref.getStringList('contacts')?.map((e) {Map m = jsonDecode(e);return Contact(number: m['number'],name: m['name']);}).toList()??[];});
-    
-    return StreamBuilder(
-        stream: _db.getContacts(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            contacts = snapshot.data ?? contacts;
-            pref.setStringList('contacts', contacts.map((e)=>e.toJstring()).toList());
-          }
-          return Card(
-              elevation: 5,
-              margin: const EdgeInsets.all(0),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: SizedBox(
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  child: Column(
-                    children: [
-                      const Text('Emergency Contacts',
-                          style: TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18)),
-                      const SizedBox(
-                        height: 10,
+    return FutureBuilder(
+      future: SharedPreferences.getInstance(),
+      builder: (context, fsnapshot) => StreamBuilder(
+          stream: _db.getContacts(),
+          builder: (context, snapshot) {
+            if (fsnapshot.hasData) {
+              SharedPreferences? pref = fsnapshot.data;
+              if (snapshot.hasData) {
+                contacts = snapshot.data ??
+                    pref?.getStringList('contacts')?.map((e) {
+                      Map m = jsonDecode(e);
+                      return Contact(number: m['number'], name: m['name']);
+                    }).toList() ??
+                    [];
+              } else {
+                contacts = pref?.getStringList('contacts')?.map((e) {
+                      Map m = jsonDecode(e);
+                      return Contact(number: m['number'], name: m['name']);
+                    }).toList() ??
+                    [];
+              }
+              pref?.setStringList(
+                  'contacts', contacts.map((e) => e.toJstring()).toList());
+              return Card(
+                  elevation: 5,
+                  margin: const EdgeInsets.all(0),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                        minWidth: double.infinity, minHeight: 100),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      child: Column(
+                        children: [
+                          const Text('Emergency Contacts',
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18)),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          ...contacts
+                              .map((e) => ContactElem(
+                                    contact: e,
+                                  ))
+                              .toList(),
+                          contacts.length < 5
+                              ? TextButton.icon(
+                                  onPressed: _cp.uploadContact,
+                                  label: const Text('Add Contact'),
+                                  icon: const Icon(Icons.person_add))
+                              : const SizedBox(),
+                        ],
                       ),
-                      ...contacts
-                          .map((e) => ContactElem(
-                                contact: e,
-                              ))
-                          .toList(),
-                      contacts.length < 5
-                          ? TextButton.icon(
-                              onPressed: _cp.uploadContact,
-                              label: const Text('Add Contact'),
-                              icon: const Icon(Icons.person_add))
-                          : const SizedBox(),
-                    ],
-                  ),
-                ),
-              ));
-        });
+                    ),
+                  ));
+            } else {
+              return Card(
+                  elevation: 5,
+                  margin: const EdgeInsets.all(0),
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                          minWidth: double.infinity, minHeight: 50),
+                      child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          child: Center(
+                            child: SpinKitFadingCircle(
+                              color: Colors.blue[300],
+                              size: 50,
+                            ),
+                          ))));
+            }
+          }),
+    );
   }
 }
 
@@ -200,7 +244,14 @@ class _SosButtonState extends State<SosButton> {
   late List<Contact> _contacts;
   @override
   Widget build(BuildContext context) {
-    SharedPreferences.getInstance().then((value){smsFlag = value.getBool('SMS')??true;_contacts = value.getStringList('contacts')?.map((e) {Map m = jsonDecode(e);return Contact(number: m['number'],name: m['name']);}).toList()??[];});
+    SharedPreferences.getInstance().then((value) {
+      smsFlag = value.getBool('SMS') ?? true;
+      _contacts = value.getStringList('contacts')?.map((e) {
+            Map m = jsonDecode(e);
+            return Contact(number: m['number'], name: m['name']);
+          }).toList() ??
+          [];
+    });
     return Card(
       elevation: 5,
       margin: const EdgeInsets.all(0),
@@ -249,10 +300,11 @@ class _SosButtonState extends State<SosButton> {
                           if (_start == 0) {
                             var locdata = DataBaseServices().updateLoc();
                             locdata.then((value) {
-                              if(smsFlag) {
-                              _sms.sendMessageAdmin(Provider.of<String>(context,listen: false), value);
-                                _sms.sendMessage(
-                                  _contacts,value);
+                              if (smsFlag) {
+                                _sms.sendMessageAdmin(
+                                    Provider.of<String>(context, listen: false),
+                                    value);
+                                _sms.sendMessage(_contacts, value);
                               }
                               setState(() {
                                 timer.cancel();

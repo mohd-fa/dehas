@@ -5,7 +5,7 @@ class Contact {
   Contact({this.name, required this.number});
 
   String toJstring(){
-    return "{'name': '$name','number':'$number'}";
+    return '{"name": "$name","number":"$number"}';
   }
 }
 
