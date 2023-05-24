@@ -1,3 +1,4 @@
+import 'package:dehas/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:dehas/models/models.dart';
 
@@ -10,6 +11,7 @@ class ContactElem extends StatefulWidget {
 }
 
 class _ContactElemState extends State<ContactElem> {
+  final _db = DataBaseServices();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,16 +33,7 @@ class _ContactElemState extends State<ContactElem> {
               Text((widget.contact.name ?? ''),maxLines: 2,textAlign: TextAlign.center,)
             ],
           ),
-          Switch(
-            activeColor: Colors.red,
-            splashRadius: 40.0,
-            value: widget.contact.isSMS,
-            onChanged: (value) {
-              setState((){
-                widget.contact.isSMS = value;
-              });
-            },
-          ),
+          IconButton(onPressed: _db.deleteContact(widget.contact.docid), icon: Icon(Icons.close)),
 
         ],
       ),

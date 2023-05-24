@@ -14,6 +14,7 @@ class SettingsPage extends StatelessWidget {
       stream: auth.authStateChanges,
       builder: (context, snapshot) {
         return SettingsList(
+          
           lightTheme: SettingsThemeData(titleTextColor: Colors.red,settingsListBackground: Colors.red[100]),
           sections: [
              SettingsSection(

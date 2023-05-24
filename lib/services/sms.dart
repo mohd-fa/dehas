@@ -8,9 +8,9 @@ class SMSService{
     
       List<String> phone = [];
       for (var i in contacts){
-        if (i.isSMS){
+
           phone.add(i.number);
-        }
+    
       }
       
     await sendSMS(message: "This message is form an alert app in my phone. \nI am in Danger here.\n\nMy location: https://maps.google.com/?q=${location.latitude},${location.longitude}", recipients: phone,sendDirect: true);

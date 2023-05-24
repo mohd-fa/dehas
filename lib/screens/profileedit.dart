@@ -47,7 +47,7 @@ final TextEditingController _nameTextEditingController =
       appBar: AppBar(
         leading: IconButton(
             icon: const Icon(
-              Icons.arrow_back_ios,
+              Icons.arrow_back,
             ),
             onPressed: () => Navigator.pop(context)),
       ),

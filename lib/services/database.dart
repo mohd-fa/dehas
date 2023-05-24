@@ -20,6 +20,11 @@ class DataBaseServices {
     return contactF.doc().set({'name': contact.name, 'number': contact.number});
   }
 
+  deleteContact(String? docid) {
+    return contactF.doc(docid).delete();
+  }
+
+
   Stream<List<Contact>> getContacts() async* {
     await for (QuerySnapshot data in contactF.snapshots()) {
       yield data.docs
