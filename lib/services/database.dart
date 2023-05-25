@@ -16,19 +16,20 @@ class DataBaseServices {
       .doc(auth.currentUser!.uid)
       .collection('location');
 
-  updateContact(Contact contact) {
-    return contactF.doc().set({'name': contact.name, 'number': contact.number});
+  updateContact(Map contact) {
+    return contactF.doc().set({'name': contact['name'], 'number': contact['number']});
   }
 
   deleteContact(String? docid) {
-    return contactF.doc(docid).delete();
+    print(docid);
+     contactF.doc(docid).delete();
   }
 
 
   Stream<List<Contact>> getContacts() async* {
     await for (QuerySnapshot data in contactF.snapshots()) {
       yield data.docs
-          .map((e)  {var m = e.data() as Map; return Contact(name: m['name'], number: m['number']);})
+          .map((e)  {var m = e.data() as Map; return Contact(name: m['name'], number: m['number'],docid: e.id);})
           .toList();
     }
   }

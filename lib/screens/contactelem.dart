@@ -33,7 +33,7 @@ class _ContactElemState extends State<ContactElem> {
               Text((widget.contact.name ?? ''),maxLines: 2,textAlign: TextAlign.center,)
             ],
           ),
-          IconButton(onPressed: _db.deleteContact(widget.contact.docid), icon: const Icon(Icons.close)),
+          IconButton(onPressed: () {_db.deleteContact(widget.contact.docid);}, icon: const Icon(Icons.close)),
 
         ],
       ),

@@ -5,13 +5,13 @@ import 'package:dehas/services/database.dart';
 class ContactPicker{
   final cont = FlutterContactPicker();
   final  db = DataBaseServices();
-  Future<m.Contact?> _selectContact() async {
+  Future<Map?> _selectContact() async {
     Contact? contact = await cont.selectContact();
-    return contact != null ? m.Contact(name: contact.fullName,number:  contact.phoneNumbers?[0]??"0"):null;
+    return contact != null ? Map.from({'name': contact.fullName,'number':  contact.phoneNumbers?[0]??"0"}):null;
   }
 
   uploadContact() async {
-    m.Contact? contact = await _selectContact();
+    Map? contact = await _selectContact();
     if (contact != null){
        return db.updateContact(contact);
     }

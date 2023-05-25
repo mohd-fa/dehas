@@ -152,13 +152,13 @@ class _ContactCardState extends State<ContactCard> {
                 contacts = snapshot.data ??
                     pref?.getStringList('contacts')?.map((e) {
                       Map m = jsonDecode(e);
-                      return Contact(number: m['number'], name: m['name']);
+                      return Contact(number: m['number'], name: m['name'],docid: m['docid']);
                     }).toList() ??
                     [];
               } else {
                 contacts = pref?.getStringList('contacts')?.map((e) {
                       Map m = jsonDecode(e);
-                      return Contact(number: m['number'], name: m['name']);
+                      return Contact(number: m['number'], name: m['name'],docid: m['docid']);
                     }).toList() ??
                     [];
               }
@@ -248,7 +248,7 @@ class _SosButtonState extends State<SosButton> {
       smsFlag = value.getBool('SMS') ?? true;
       _contacts = value.getStringList('contacts')?.map((e) {
             Map m = jsonDecode(e);
-            return Contact(number: m['number'], name: m['name']);
+            return Contact(number: m['number'], name: m['name'], docid: m['docid']);
           }).toList() ??
           [];
     });
