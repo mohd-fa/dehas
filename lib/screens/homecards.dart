@@ -21,52 +21,53 @@ class SmsCard extends StatefulWidget {
 }
 
 class _SmsCardState extends State<SmsCard> {
-bool smsFlag = true;
+  bool smsFlag = true;
   @override
   Widget build(BuildContext context) {
     late SharedPreferences pref;
     return FutureBuilder(
-      future: SharedPreferences.getInstance(),
-      builder: (context, snapshot) {
-        if( snapshot.hasData){
-          pref = snapshot.data!;
-          smsFlag = pref.getBool('SMS')??true;
-        }
-        return Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          elevation: 5,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              const Text('SMS Service',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18)),
-              const SizedBox(
-                height: 10,
-              ),
-              const Icon(
-                Icons.sms,
-                size: 50,
-              ),
-              Switch(
-                activeColor: Colors.red,
-                splashRadius: 40.0,
-                value: smsFlag,
-                onChanged: (value) async{
-                  setState(()  {
-                    smsFlag = value;
-                  });
-                    await pref.setBool('SMS', value);
-                    
-                },
-              ),
-            ]),
-          ),
-        );
-      }
-    );
+        future: SharedPreferences.getInstance(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            pref = snapshot.data!;
+            smsFlag = pref.getBool('SMS') ?? true;
+          }
+          return Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            elevation: 5,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('SMS Service',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18)),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Icon(
+                      Icons.sms,
+                      size: 50,
+                    ),
+                    Switch(
+                      activeColor: Colors.red,
+                      splashRadius: 40.0,
+                      value: smsFlag,
+                      onChanged: (value) async {
+                        setState(() {
+                          smsFlag = value;
+                        });
+                        await pref.setBool('SMS', value);
+                      },
+                    ),
+                  ]),
+            ),
+          );
+        });
   }
 }
 
@@ -152,13 +153,19 @@ class _ContactCardState extends State<ContactCard> {
                 contacts = snapshot.data ??
                     pref?.getStringList('contacts')?.map((e) {
                       Map m = jsonDecode(e);
-                      return Contact(number: m['number'], name: m['name'],docid: m['docid']);
+                      return Contact(
+                          number: m['number'],
+                          name: m['name'],
+                          docid: m['docid']);
                     }).toList() ??
                     [];
               } else {
                 contacts = pref?.getStringList('contacts')?.map((e) {
                       Map m = jsonDecode(e);
-                      return Contact(number: m['number'], name: m['name'],docid: m['docid']);
+                      return Contact(
+                          number: m['number'],
+                          name: m['name'],
+                          docid: m['docid']);
                     }).toList() ??
                     [];
               }
@@ -248,7 +255,8 @@ class _SosButtonState extends State<SosButton> {
       smsFlag = value.getBool('SMS') ?? true;
       _contacts = value.getStringList('contacts')?.map((e) {
             Map m = jsonDecode(e);
-            return Contact(number: m['number'], name: m['name'], docid: m['docid']);
+            return Contact(
+                number: m['number'], name: m['name'], docid: m['docid']);
           }).toList() ??
           [];
     });

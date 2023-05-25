@@ -38,6 +38,7 @@ class _SignInState extends State<SignIn> {
       errorMessage = e.message;
     }
   }
+
   var isSign = true;
 
   @override
@@ -50,9 +51,10 @@ class _SignInState extends State<SignIn> {
                 height: MediaQuery.of(context).size.height,
                 decoration: const BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/back.png'), fit: BoxFit.cover)),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                        image: AssetImage('assets/back.png'),
+                        fit: BoxFit.cover)),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 20.0, horizontal: 20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -60,7 +62,6 @@ class _SignInState extends State<SignIn> {
                     const Text(
                       'D.E.H.A.S',
                       style: TextStyle(
-                        
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
@@ -153,15 +154,17 @@ class _SignInState extends State<SignIn> {
                                     backgroundColor: Colors.white70),
                                 icon: Image.asset('assets/google.png'),
                                 onPressed: _auth.signInGoogle,
-                                label: isSign ? const Text(
-                                  'Sign in with Google',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 20),
-                                ): const Text(
-                                  'Register with Google',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 20),
-                                )),
+                                label: isSign
+                                    ? const Text(
+                                        'Sign in with Google',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 20),
+                                      )
+                                    : const Text(
+                                        'Register with Google',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 20),
+                                      )),
                             const SizedBox(
                               height: 20,
                             ),
@@ -170,9 +173,15 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    TextButton(onPressed:  () { setState(() {
-                      isSign = !isSign;
-                    });}, child: isSign ? const Text('Register Here'):const Text('Sign In Here'))
+                    TextButton(
+                        onPressed: () {
+                          setState(() {
+                            isSign = !isSign;
+                          });
+                        },
+                        child: isSign
+                            ? const Text('Register Here')
+                            : const Text('Sign In Here'))
                   ],
                 ),
               ),

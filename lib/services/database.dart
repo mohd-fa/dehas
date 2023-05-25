@@ -17,20 +17,21 @@ class DataBaseServices {
       .collection('location');
 
   updateContact(Map contact) {
-    return contactF.doc().set({'name': contact['name'], 'number': contact['number']});
+    return contactF
+        .doc()
+        .set({'name': contact['name'], 'number': contact['number']});
   }
 
   deleteContact(String? docid) {
-    print(docid);
-     contactF.doc(docid).delete();
+    contactF.doc(docid).delete();
   }
-
 
   Stream<List<Contact>> getContacts() async* {
     await for (QuerySnapshot data in contactF.snapshots()) {
-      yield data.docs
-          .map((e)  {var m = e.data() as Map; return Contact(name: m['name'], number: m['number'],docid: e.id);})
-          .toList();
+      yield data.docs.map((e) {
+        var m = e.data() as Map;
+        return Contact(name: m['name'], number: m['number'], docid: e.id);
+      }).toList();
     }
   }
 

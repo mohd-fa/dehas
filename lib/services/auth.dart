@@ -7,8 +7,7 @@ class AuthService {
 
   User? get currentUser => _auth.currentUser;
 
-
-  Future signInGoogle()async{
+  Future signInGoogle() async {
     await _auth.signInWithProvider(GoogleAuthProvider());
   }
 
@@ -18,6 +17,7 @@ class AuthService {
       password: password,
     );
   }
+
   Future registerWithEmailAndPassword(String email, String password) async {
     await _auth.createUserWithEmailAndPassword(
       email: email,

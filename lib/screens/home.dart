@@ -13,13 +13,18 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int navindex = 0;
-  final List<Widget> pages = [ const HomePage(),const LocationPage(),SettingsPage()];
+  final List<Widget> pages = [
+    const HomePage(),
+    const LocationPage(),
+    SettingsPage()
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[navindex],
-      bottomNavigationBar: SlidingClippedNavBar(backgroundColor: Colors.redAccent.shade700,
+      bottomNavigationBar: SlidingClippedNavBar(
+        backgroundColor: Colors.redAccent.shade700,
         activeColor: Colors.white,
         selectedIndex: navindex,
         onButtonPressed: (index) => setState(() {

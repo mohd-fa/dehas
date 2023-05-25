@@ -7,25 +7,25 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/bg1.jpg'), fit: BoxFit.cover)),
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/bg1.jpg'), fit: BoxFit.cover)),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-                Image.asset('assets/logo.png'),
-               const Text(
-                  'D.E.H.A.S',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.none
-                      ),
-                      
-                ),
-              const SizedBox(height: 10,),
+              Image.asset('assets/logo.png'),
+              const Text(
+                'D.E.H.A.S',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.none),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               SpinKitFadingCircle(
                 color: Colors.blue[300],
                 size: 50,

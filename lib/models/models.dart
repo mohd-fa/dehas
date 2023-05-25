@@ -4,8 +4,7 @@ class Contact {
   final String? docid;
   Contact({this.name, required this.number, required this.docid});
 
-  String toJstring(){
+  String toJstring() {
     return '{"name": "$name","number":"$number"}';
   }
 }
-

@@ -22,7 +22,7 @@ class LocationService {
     return true;
   }
 
-  Future<LocationData> getUploadLoc(){
+  Future<LocationData> getUploadLoc() {
     getLocationPermition();
     getLocationService();
     return location.getLocation();
