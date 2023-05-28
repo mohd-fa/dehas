@@ -84,7 +84,7 @@ class _DroneCardState extends State<DroneCard> {
   @override
   Widget build(BuildContext context) {
     late SharedPreferences pref;
-    bool droneFlag = true;
+    bool droneFlag = false;
     SharedPreferences.getInstance().then((value) {
       pref = value;
       droneFlag = pref.getBool('drone') ?? false;
@@ -266,7 +266,6 @@ class _SosButtonState extends State<SosButton> {
       color: Colors.red[100],
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20))),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Stack(children: [
         Container(
             padding: EdgeInsets.only(
