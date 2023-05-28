@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "886744000520",
-    "project_id": "women-safety-alert13",
-    "storage_bucket": "women-safety-alert13.appspot.com"
+    "project_number": "626276300172",
+    "project_id": "dehasalert",
+    "storage_bucket": "dehasalert.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:886744000520:android:46338bdd702867f2c749bd",
+        "mobilesdk_app_id": "1:626276300172:android:547a74ef98a626ddfe92a9",
         "android_client_info": {
           "package_name": "com.alertapp13.dehas"
         }
       },
       "oauth_client": [
         {
-          "client_id": "886744000520-sq6lmmv8va3u6k161l885gv5pssjtknj.apps.googleusercontent.com",
+          "client_id": "626276300172-7r8o15v4mf5eip5kp3no14n35h16qr8p.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDme7NFZMcP8CmKMkfwauBmdWflbVqjtEA"
+          "current_key": "AIzaSyBRpB18mATuNbIKHnaTLHpryz48ERgBUJU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "886744000520-bvn2hoc5urueq3tidnrrjhk6mdksn4oo.apps.googleusercontent.com",
+              "client_id": "626276300172-7r8o15v4mf5eip5kp3no14n35h16qr8p.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

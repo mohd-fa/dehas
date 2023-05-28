@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
   final List<Widget> pages = [
     const HomePage(),
     const LocationPage(),
-    SettingsPage()
+    const SettingsPage()
   ];
 
   @override
