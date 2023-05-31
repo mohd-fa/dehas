@@ -58,9 +58,9 @@ class DataBaseServices {
         {'type': 0, 'email': userdata.email,});
   }
 
-  updateName(
+  updateName(name
      ) async {
     return await user.doc(auth.currentUser!.uid).update(
-        {'name': auth.currentUser!.displayName,});
+        {'name': name,});
   }
 }

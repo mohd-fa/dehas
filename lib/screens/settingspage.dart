@@ -1,3 +1,4 @@
+import 'package:dehas/screens/aboutpage.dart';
 import 'package:dehas/screens/profileedit.dart';
 import 'package:dehas/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +57,15 @@ class _SettingsPageState extends State<SettingsPage> {
             SettingsTile.navigation(
               title: const Text('About'),
               leading: const Icon(Icons.info),
+              onPressed: (ctx) {
+                  Navigator.push(
+                          ctx,
+                          MaterialPageRoute(
+                              builder: ((context) => AboutPage())))
+                      .then((value) => setState(() {
+                            name = auth.currentUser?.displayName ?? '';
+                          }));
+                },
             ),
           ],
         ),

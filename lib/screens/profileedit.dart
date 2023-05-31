@@ -32,7 +32,7 @@ class ProfileEdit extends StatelessWidget {
                     auth.currentUser
                         ?.updateDisplayName(_nameTextEditingController.text);
                     auth.currentUser?.reload().then((value) {
-                      DataBaseServices().updateName();
+                      DataBaseServices().updateName(_nameTextEditingController.text);
                       Navigator.pop(context);
                     });
                   }
