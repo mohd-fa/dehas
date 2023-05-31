@@ -1,3 +1,4 @@
+import 'package:dehas/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -19,10 +20,14 @@ class AuthService {
   }
 
   Future registerWithEmailAndPassword(String email, String password) async {
-    await _auth.createUserWithEmailAndPassword(
+    UserCredential userC = await _auth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
+    final user = userC.user;
+    if (user != null) {
+      await DataBaseServices().updateUser(user);
+    }
   }
 
   // sign out

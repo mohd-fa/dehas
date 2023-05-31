@@ -7,7 +7,7 @@ class ProfileEdit extends StatelessWidget {
 
   final TextEditingController _nameTextEditingController =
       TextEditingController(text: auth.currentUser?.displayName);
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +32,7 @@ class ProfileEdit extends StatelessWidget {
                     auth.currentUser
                         ?.updateDisplayName(_nameTextEditingController.text);
                     auth.currentUser?.reload().then((value) {
+                      DataBaseServices().updateName();
                       Navigator.pop(context);
                     });
                   }

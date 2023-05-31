@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:location/location.dart';
 import 'package:dehas/services/auth.dart';
 import 'package:dehas/models/models.dart';
@@ -15,6 +16,9 @@ class DataBaseServices {
       .collection('userData')
       .doc(auth.currentUser!.uid)
       .collection('location');
+
+  final CollectionReference user = FirebaseFirestore.instance
+      .collection('userData');
 
   updateContact(Map contact) {
     return contactF
@@ -41,8 +45,22 @@ class DataBaseServices {
     locationF.doc(t.toDate().toIso8601String()).set({
       'latitude': locData.latitude,
       'longitude': locData.longitude,
-      'timestamp': t
+      'timestamp': t,
+      'uid': auth.currentUser!.uid,
+
     });
     return locData;
+  }
+
+  updateUser(User userdata
+     ) async {
+    return await user.doc(userdata.uid).set(
+        {'type': 0, 'email': userdata.email,});
+  }
+
+  updateName(
+     ) async {
+    return await user.doc(auth.currentUser!.uid).update(
+        {'name': auth.currentUser!.displayName,});
   }
 }

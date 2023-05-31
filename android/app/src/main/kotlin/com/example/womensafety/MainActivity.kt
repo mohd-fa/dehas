@@ -1,4 +1,4 @@
-package com.example.dehas
+package com.alertapp13.dehas
 
 import io.flutter.embedding.android.FlutterActivity
 
