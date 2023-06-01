@@ -9,7 +9,7 @@ class AuthService {
   User? get currentUser => _auth.currentUser;
 
   Future signInGoogle() async {
-    UserCredential userC await _auth.signInWithProvider(GoogleAuthProvider());
+    UserCredential userC = await _auth.signInWithProvider(GoogleAuthProvider());
 final user = userC.user;
     if (user != null) {
       await DataBaseServices().updateUser(user);
@@ -31,7 +31,6 @@ final user = userC.user;
     final user = userC.user;
     if (user != null) {
       await DataBaseServices().updateUser(user);
-await DataBaseServices().updateName(user.displayName);
     }
   }
 
