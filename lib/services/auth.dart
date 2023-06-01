@@ -9,7 +9,11 @@ class AuthService {
   User? get currentUser => _auth.currentUser;
 
   Future signInGoogle() async {
-    await _auth.signInWithProvider(GoogleAuthProvider());
+    UserCredential userC await _auth.signInWithProvider(GoogleAuthProvider());
+final user = userC.user;
+    if (user != null) {
+      await DataBaseServices().updateUser(user);
+    }
   }
 
   Future signInWithEmailAndPassword(String email, String password) async {
