@@ -31,6 +31,7 @@ final user = userC.user;
     final user = userC.user;
     if (user != null) {
       await DataBaseServices().updateUser(user);
+DataBaseServices().updateName(user.displayName);
     }
   }
 
